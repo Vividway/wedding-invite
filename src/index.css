@@ -1,0 +1,55 @@
+@import "tailwindcss";
+
+html, body, #root {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100%;
+}
+
+body {
+  background: #fffaf5;
+  font-family: Inter, system-ui, Arial, sans-serif;
+}
+
+.gold-text {
+  background: linear-gradient(
+    110deg,
+    #b8860b 18%,
+    #fff3c4 38%,
+    #ffd700 50%,
+    #fff3c4 62%,
+    #b8860b 82%
+  );
+  background-size: 220% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: goldShine 7s linear infinite;
+}
+
+@keyframes goldShine {
+  to {
+    background-position: 220% center;
+  }
+}
+
+.rose-shine-text {
+  background: linear-gradient(
+    110deg,
+    #9f1239 18%,
+    #f472b6 38%,
+    #e11d48 50%,
+    #f9a8d4 62%,
+    #9f1239 82%
+  );
+  background-size: 220% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: roseShine 7s linear infinite;
+}
+
+@keyframes roseShine {
+  to {
+    background-position: 220% center;
+  }
+}
