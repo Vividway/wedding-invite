@@ -114,7 +114,7 @@ const config = {
       title: "Reception · Dinner",
       family: "both",
       dateLabel: "Saturday, 09th May 2026",
-      timeLabel: "7:00 PM onwards",
+      timeLabel: "6:00 PM onwards",
       venue: "K Convention Hall",
       address: "Aswaraopeta Road, Jangareddygudem",
       mapsUrl:
@@ -620,6 +620,14 @@ function Lightbox({ images, index, onClose, setIndex }) {
 }
 
 export default function WeddingInvitePage() {
+  const audioRef = useRef(null);
+
+  const playMusic = () => {
+    if (audioRef.current) {
+      audioRef.current.volume = 0.35;
+      audioRef.current.play().catch(() => { });
+    }
+  };
   const [progress, setProgress] = useState(0);
   const [lightboxIndex, setLightboxIndex] = useState(null);
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -798,7 +806,13 @@ export default function WeddingInvitePage() {
         : "Wedding Invite";
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-rose-50 via-orange-50 to-amber-50 text-stone-900">
+    <div
+      onClick={playMusic}
+      className="min-h-screen bg-gradient-to-b from-rose-50 via-orange-50 to-amber-50 text-stone-900"
+    >
+      <audio ref={audioRef} loop>
+        <source src="/wedding-music.mp3" type="audio/mpeg" />
+      </audio>
       <FloatingPetals />
 
       <div className="fixed left-0 top-0 z-[60] h-1 w-full bg-transparent">
@@ -1005,7 +1019,7 @@ export default function WeddingInvitePage() {
                           Reception · Saturday, 09th May 2026
                         </div>
                         <div className="text-white/75">
-                          7:00 PM onwards · Jangareddygudem
+                          6:00 PM onwards · Jangareddygudem
                         </div>
                       </div>
                     </div>
@@ -1407,7 +1421,9 @@ export default function WeddingInvitePage() {
                 {config.couple.groom} & {config.couple.bride}
               </h3>
               <p className="mt-4 max-w-xl text-white/70 leading-8">
-                Thank you for being part of our celebration. This invite is designed to be beautiful, practical, elder-friendly, and easy to update instantly even after sharing.
+                Thank you for being part of our joyous celebration.
+                <br />
+                Your love and blessings mean the world to us.
               </p>
             </div>
             <div>
@@ -1422,7 +1438,7 @@ export default function WeddingInvitePage() {
                 </div>
                 <div>
                   <div className="font-medium text-white">Reception</div>
-                  <div>09 May 2026 · 7:00 PM onwards</div>
+                  <div>09 May 2026 · 6:00 PM onwards</div>
                   <div>K Convention Hall, Jangareddygudem</div>
                 </div>
               </div>
