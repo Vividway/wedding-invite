@@ -176,6 +176,86 @@ const config = {
   ],
 };
 
+const celebrationTimeline = [
+  {
+    date: "06 May 2026",
+    day: "Wednesday",
+    events: [
+      {
+        icon: "🌿",
+        title: "Pellikoduku",
+        time: "08:00 AM",
+        location: "Jangareddygudem",
+        mapsUrl: "https://maps.app.goo.gl/tZuLshg2iUBWGZ367?g_st=ic",
+      },
+      {
+        icon: "🌼",
+        title: "Groom Haldi",
+        time: "04:00 PM",
+        location: "Jangareddygudem",
+        mapsUrl: "https://maps.app.goo.gl/tZuLshg2iUBWGZ367?g_st=ic",
+      },
+      {
+        icon: "🌸",
+        title: "Pellikuthuru",
+        time: "08:30 AM",
+        location: "Gorantla",
+        mapsUrl: "https://share.google/zOqTpQoDmhK5QDSJ5",
+      },
+      {
+        icon: "🌼",
+        title: "Bride Haldi",
+        time: "10:00 AM",
+        location: "Gorantla",
+        mapsUrl: "https://share.google/zOqTpQoDmhK5QDSJ5",
+      },
+    ],
+  },
+  {
+    date: "07 May 2026",
+    day: "Thursday",
+    events: [
+      {
+        icon: "🪔",
+        title: "Wedding Rituals",
+        time: "07:30 AM",
+        location: "Guntur",
+        mapsUrl: "https://maps.app.goo.gl/rYkRQBskgLnqErYp6?g_st=ic",
+      },
+      {
+        icon: "💍",
+        title: "The Big Day",
+        time: "04:00 PM onwards",
+        location: "Guntur",
+        mapsUrl: "https://maps.app.goo.gl/RPjotFU6mZR8PDra7",
+        highlight: true,
+        note: "Sumuhurtham at 10:38 PM",
+      },
+    ],
+  },
+  {
+    date: "09 May 2026",
+    day: "Saturday",
+    events: [
+      {
+        icon: "🙏",
+        title: "Vratham",
+        time: "08:00 AM",
+        location: "Jangareddygudem",
+        mapsUrl: "https://maps.app.goo.gl/tZuLshg2iUBWGZ367?g_st=ic",
+      },
+      {
+        icon: "🍽️",
+        title: "Reception",
+        time: "06:00 PM onwards",
+        location: "Jangareddygudem",
+        mapsUrl: "https://maps.app.goo.gl/5u95czYqiaiWsM978",
+        highlight: true,
+      },
+    ],
+  },
+];
+
 const sectionIds = [
   { id: "home", label: "Home" },
   { id: "events", label: "Events" },
@@ -506,7 +586,106 @@ function FamilyCard({ side, title, parentText, whatsappUrl, image }) {
     </motion.div>
   );
 }
+function CelebrationTimeline() {
+  return (
+    <section id="timeline" className="px-4 py-12 md:px-8 md:py-16">
+      <div className="mx-auto max-w-7xl">
+        <SectionTitle
+          eyebrow="Wedding Week"
+          title="Celebration Timeline"
+          subtitle="A complete look at the ceremonies, moments, and celebrations leading up to the big day."
+        />
 
+        <div className="relative mx-auto max-w-5xl">
+          <div className="absolute left-6 top-0 hidden h-full w-px bg-gradient-to-b from-rose-300 via-amber-300 to-orange-300 md:block" />
+
+          <div className="space-y-8">
+            {celebrationTimeline.map((group) => (
+              <div key={group.date} className="relative md:pl-16">
+                <div className="mb-4 inline-flex items-center gap-3 rounded-full border border-amber-200 bg-white px-5 py-3 shadow-sm">
+                  <span className="h-3 w-3 rounded-full bg-gradient-to-r from-rose-500 to-orange-400 shadow-[0_0_0_6px_rgba(251,191,36,0.18)]" />
+                  <div>
+                    <div className="text-xs uppercase tracking-[0.28em] text-rose-600">
+                      {group.day}
+                    </div>
+                    <div className="text-lg font-semibold text-stone-900">
+                      {group.date}
+                    </div>
+                  </div>
+                </div>
+
+                <div className="grid gap-4">
+                  {group.events.map((event) => (
+                    <motion.div
+                      key={`${group.date}-${event.title}`}
+                      whileHover={{ y: -4 }}
+                      className={`rounded-[1.8rem] border p-5 shadow-[0_20px_60px_rgba(80,20,20,0.08)] ${event.highlight
+                          ? "border-amber-300 bg-gradient-to-br from-amber-50 via-white to-rose-50"
+                          : "border-amber-100 bg-white"
+                        }`}
+                    >
+                      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+                        <div className="flex items-start gap-4">
+                          <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-rose-50 to-amber-50 text-2xl shadow-sm">
+                            {event.icon}
+                          </div>
+
+                          <div>
+                            <div className="flex flex-wrap items-center gap-2">
+                              <h3
+                                className="text-xl font-semibold text-stone-900 md:text-2xl"
+                                style={{ fontFamily: "serif" }}
+                              >
+                                {event.title}
+                              </h3>
+
+                              {event.highlight ? (
+                                <span className="rounded-full bg-amber-100 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-amber-800">
+                                  Main
+                                </span>
+                              ) : null}
+                            </div>
+
+                            <div className="mt-2 flex flex-wrap gap-3 text-sm text-stone-600">
+                              <span className="inline-flex items-center gap-1">
+                                <Clock3 className="h-4 w-4 text-rose-500" />
+                                {event.time}
+                              </span>
+                              <span className="inline-flex items-center gap-1">
+                                <MapPin className="h-4 w-4 text-orange-500" />
+                                {event.location}
+                              </span>
+                            </div>
+
+                            {event.note ? (
+                              <div className="mt-3 inline-flex rounded-full bg-rose-50 px-4 py-2 text-sm font-medium text-rose-700">
+                                {event.note}
+                              </div>
+                            ) : null}
+                          </div>
+                        </div>
+
+                        <a
+                          href={event.mapsUrl}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="inline-flex items-center justify-center gap-2 rounded-full border border-stone-200 bg-white px-5 py-3 text-sm font-medium text-stone-700 shadow-sm transition hover:scale-[1.02]"
+                        >
+                          <MapPin className="h-4 w-4" />
+                          View Location
+                        </a>
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
 function InfoTabs() {
   const [active, setActive] = useState(config.infoTabs[0]?.id ?? "");
   const current =
@@ -1157,6 +1336,7 @@ export default function WeddingInvitePage() {
           </div>
         </div>
       </section>
+      <CelebrationTimeline />
 
       <section id="info" className="px-4 py-12 md:px-8 md:py-16">
         <div className="mx-auto max-w-7xl">
