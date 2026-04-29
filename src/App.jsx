@@ -800,11 +800,34 @@ function Lightbox({ images, index, onClose, setIndex }) {
 
 export default function WeddingInvitePage() {
   const audioRef = useRef(null);
+  const [musicPlaying, setMusicPlaying] = useState(false);
 
-  const playMusic = () => {
-    if (audioRef.current) {
-      audioRef.current.volume = 0.35;
-      audioRef.current.play().catch(() => { });
+  const startMusicOnce = () => {
+    if (!audioRef.current || musicPlaying) return;
+
+    audioRef.current.volume = 0.28;
+
+    audioRef.current
+      .play()
+      .then(() => setMusicPlaying(true))
+      .catch(() => { });
+  };
+
+  const toggleMusic = (event) => {
+    event.stopPropagation();
+
+    if (!audioRef.current) return;
+
+    audioRef.current.volume = 0.28;
+
+    if (musicPlaying) {
+      audioRef.current.pause();
+      setMusicPlaying(false);
+    } else {
+      audioRef.current
+        .play()
+        .then(() => setMusicPlaying(true))
+        .catch(() => setMusicPlaying(false));
     }
   };
   const [progress, setProgress] = useState(0);
@@ -861,6 +884,25 @@ export default function WeddingInvitePage() {
     const timer = window.setTimeout(() => setCopyStatus(""), 2200);
     return () => window.clearTimeout(timer);
   }, [copyStatus]);
+
+  useEffect(() => {
+    const handleVisibilityChange = () => {
+      if (document.hidden && audioRef.current) {
+        audioRef.current.pause();
+        setMusicPlaying(false);
+      }
+    };
+
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+
+    return () => {
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+    };
+  }, []);
+
+  useEffect(() => {
+    startMusicOnce();
+  }, []);
 
   const visibleFamilies = useMemo(() => {
     if (view === "groom-family") {
@@ -986,13 +1028,22 @@ export default function WeddingInvitePage() {
 
   return (
     <div
-      onClick={playMusic}
+      onClick={startMusicOnce}
       className="min-h-screen bg-gradient-to-b from-rose-50 via-orange-50 to-amber-50 text-stone-900"
     >
       <audio ref={audioRef} loop>
         <source src="/wedding-music.mp3" type="audio/mpeg" />
       </audio>
       <FloatingPetals />
+
+      <button
+        type="button"
+        onClick={toggleMusic}
+        className="fixed bottom-4 right-4 md:bottom-5 md:right-5 z-50 inline-flex items-center gap-2 rounded-full border border-amber-200 bg-white/90 px-4 py-3 text-sm font-semibold text-stone-800 shadow-[0_12px_35px_rgba(80,20,20,0.18)] backdrop-blur-xl transition hover:scale-105"
+      >
+        <span>{musicPlaying ? "🔊" : "🔇"}</span>
+        <span>{musicPlaying ? "Music On" : "Tap for Music"}</span>
+      </button>
 
       <div className="fixed left-0 top-0 z-[60] h-1 w-full bg-transparent">
         <div
