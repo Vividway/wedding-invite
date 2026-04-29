@@ -46,12 +46,12 @@ const config = {
   },
   contact: {
     whatsappRSVP:
-      "https://wa.me/919999999999?text=Namaskaram!%20I%20would%20love%20to%20RSVP%20for%20the%20wedding%20celebrations.",
+      "https://wa.me/917993912712?text=Namaskaram!%20I%20would%20love%20to%20RSVP%20for%20the%20wedding%20celebrations.",
     groomFamilyWhatsapp:
-      "https://wa.me/919999999999?text=Namaskaram!%20RSVP%20from%20Groom%20Family%20guest.",
+      "https://wa.me/917993912712?text=Namaskaram!%20RSVP%20from%20Groom%20Family%20guest.",
     brideFamilyWhatsapp:
-      "https://wa.me/919999999998?text=Namaskaram!%20RSVP%20from%20Bride%20Family%20guest.",
-    phone: "+91 99999 99999",
+      "https://wa.me/918919244916?text=Namaskaram!%20RSVP%20from%20Bride%20Family%20guest.",
+    phone: "+91 7993912712",
     instagram: "https://instagram.com/yourhandle",
     supportText:
       "Need directions, parking help, room details, or a last-minute update? Reach out anytime.",
@@ -580,7 +580,7 @@ function FamilyCard({ side, title, parentText, whatsappUrl, image }) {
         <img
           src={image}
           alt={title}
-          className="h-64 w-full object-cover object-center transition duration-500 hover:scale-105 md:h-72"
+          className="h-50 w-full object-cover object-center transition duration-500 hover:scale-105 md:h-72"
         />
       </div>
     </motion.div>
