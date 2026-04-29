@@ -580,10 +580,7 @@ function FamilyCard({ side, title, parentText, whatsappUrl, image }) {
         <img
           src={image}
           alt={title}
-          className={`h-64 w-full object-cover transition duration-500 hover:scale-105 md:h-72 ${title.includes("Bhimavarapu")
-            ? "scale-125 translate-x-4 object-center"
-            : "object-center"
-            }`}
+          className="h-64 w-full object-cover object-center transition duration-500 hover:scale-105 md:h-72"
         />
       </div>
     </motion.div>
