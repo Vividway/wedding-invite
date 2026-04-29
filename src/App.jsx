@@ -580,7 +580,10 @@ function FamilyCard({ side, title, parentText, whatsappUrl, image }) {
         <img
           src={image}
           alt={title}
-          className="h-64 w-full object-cover transition duration-500 hover:scale-105 md:h-72"
+          className={`h-64 w-full object-cover transition duration-500 hover:scale-105 md:h-72 ${title.includes("Bhimavarapu")
+            ? "scale-125 translate-x-4 object-center"
+            : "object-center"
+            }`}
         />
       </div>
     </motion.div>
@@ -619,12 +622,12 @@ function CelebrationTimeline() {
                     <motion.div
                       key={`${group.date}-${event.title}`}
                       whileHover={{ y: -4 }}
-                      className={`rounded-[1.8rem] border p-5 shadow-[0_20px_60px_rgba(80,20,20,0.08)] ${event.highlight
-                          ? "border-amber-300 bg-gradient-to-br from-amber-50 via-white to-rose-50"
-                          : "border-amber-100 bg-white"
+                      className={`rounded-[1.4rem] border p-4 shadow-[0_14px_40px_rgba(80,20,20,0.07)] md:rounded-[1.8rem] md:p-5 md:shadow-[0_20px_60px_rgba(80,20,20,0.08)] ${event.highlight
+                        ? "border-amber-300 bg-gradient-to-br from-amber-50 via-white to-rose-50"
+                        : "border-amber-100 bg-white"
                         }`}
                     >
-                      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+                      <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
                         <div className="flex items-start gap-4">
                           <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-rose-50 to-amber-50 text-2xl shadow-sm">
                             {event.icon}
@@ -1265,8 +1268,8 @@ export default function WeddingInvitePage() {
         <div className="mx-auto max-w-7xl">
           <SectionTitle
             eyebrow="Pre-Wedding Highlight"
-            title="A Little Glimpse Before the Big Day"
-            subtitle="A glimpse of our story — the laughter, the moments, and everything that led us here."
+            title="Pre-Wedding Moments Coming Soon"
+            subtitle="The smiles, laughter, and little moments before the big day will be revealed here soon."
           />
 
           <div className="mb-6 flex flex-col items-center justify-between gap-4 rounded-[2rem] border border-amber-100 bg-white p-5 shadow-[0_25px_60px_rgba(80,20,20,0.08)] md:flex-row">
@@ -1281,6 +1284,7 @@ export default function WeddingInvitePage() {
                 Tag your moments and be part of our story
               </div>
             </div>
+
             <a
               href={config.contact.instagram}
               target="_blank"
@@ -1291,26 +1295,49 @@ export default function WeddingInvitePage() {
             </a>
           </div>
 
-          <div className="columns-1 gap-4 space-y-4 md:columns-2 lg:columns-3">
-            {config.media.gallery.map((image, index) => (
-              <motion.button
-                key={image.src}
-                type="button"
-                whileHover={{ scale: 1.01 }}
-                onClick={() => setLightboxIndex(index)}
-                className="group relative block w-full overflow-hidden rounded-[1.75rem]"
-              >
-                <img
-                  src={image.src}
-                  alt={image.alt}
-                  className="w-full rounded-[1.75rem] object-cover transition duration-500 group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-transparent opacity-0 transition group-hover:opacity-100" />
-                <div className="absolute bottom-4 left-4 rounded-full bg-white/90 px-3 py-2 text-xs font-medium text-stone-900 opacity-0 shadow-lg transition group-hover:opacity-100">
-                  Open photo
+          <div className="relative overflow-hidden rounded-[2rem] border border-amber-100 bg-white p-3 shadow-[0_30px_90px_rgba(80,20,20,0.12)] md:p-4">
+            <div className="columns-1 gap-4 space-y-4 blur-[3px] brightness-90 md:columns-2 lg:columns-3">
+              {config.media.gallery.map((image) => (
+                <div
+                  key={image.src}
+                  className="relative block w-full overflow-hidden rounded-[1.5rem]"
+                >
+                  <img
+                    src={image.src}
+                    alt={image.alt}
+                    className="w-full rounded-[1.5rem] object-cover"
+                  />
+                  <div className="absolute inset-0 bg-black/20" />
                 </div>
-              </motion.button>
-            ))}
+              ))}
+            </div>
+
+            <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-b from-white/20 via-white/50 to-white/25 px-4">
+              <div className="max-w-md rounded-[2rem] border border-white/70 bg-white/85 p-6 text-center shadow-[0_25px_80px_rgba(80,20,20,0.18)] backdrop-blur-xl md:p-8">
+                <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-br from-rose-100 to-amber-100 text-2xl shadow-sm">
+                  ✨
+                </div>
+
+                <div className="text-xs font-semibold uppercase tracking-[0.3em] text-rose-600">
+                  Revealing Soon
+                </div>
+
+                <h3
+                  className="mt-3 text-3xl font-semibold text-stone-900 md:text-4xl"
+                  style={{ fontFamily: "serif" }}
+                >
+                  A Little Surprise Before the Big Day
+                </h3>
+
+                <p className="mt-3 text-sm leading-7 text-stone-600 md:text-base">
+                  Our pre-wedding memories are getting ready. Come back soon to see the laughter, love, and moments behind the celebration.
+                </p>
+
+                <div className="mt-5 inline-flex rounded-full bg-gradient-to-r from-rose-600 to-orange-500 px-5 py-3 text-sm font-medium text-white shadow-lg">
+                  Stay tuned ✨
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -1373,7 +1400,7 @@ export default function WeddingInvitePage() {
                   <div>
                     <div className="font-medium">WhatsApp RSVP</div>
                     <div className="text-white/75">
-                      Quick fallback option for instant confirmations
+                      Fastest way to confirm your presence
                     </div>
                   </div>
                 </a>
